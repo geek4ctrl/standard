@@ -18,3 +18,5 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     icon: 'description'
   }
 ];
+
+export {};
