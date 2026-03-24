@@ -9,4 +9,5 @@ import { Component, Input } from '@angular/core';
 export class ButtonComponent {
   @Input({ required: true }) label!: string;
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
+  @Input() fullWidth = false;
 }

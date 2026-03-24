@@ -1,1 +1,7 @@
-<button class="app-button" [attr.type]="type">{{ label }}</button>
+<button
+	class="app-button"
+	[class.app-button--full]="fullWidth"
+	[attr.type]="type"
+>
+	{{ label }}
+</button>
