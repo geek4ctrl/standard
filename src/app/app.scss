@@ -15,6 +15,12 @@
 	--nav-action-text: #1c4fd1;
 	--nav-action-shadow: 0 10px 22px -16px rgba(28, 79, 209, 0.6);
 	--nav-action-shadow-hover: 0 12px 24px -18px rgba(28, 79, 209, 0.7);
+	--button-bg: var(--nav-action-bg);
+	--button-bg-hover: var(--nav-action-bg-hover);
+	--button-border: var(--nav-action-border);
+	--button-text: var(--nav-action-text);
+	--button-shadow: var(--nav-action-shadow);
+	--button-shadow-hover: var(--nav-action-shadow-hover);
 	--nav-radius: 18px;
 	--sidebar-bg: #ffffff;
 	--sidebar-border: #e6ecf5;
