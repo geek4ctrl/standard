@@ -1,0 +1,20 @@
+.app-button {
+  border: 1px solid var(--button-border);
+  background: var(--button-bg);
+  color: var(--button-text);
+  padding: 10px 18px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: var(--button-shadow);
+}
+
+.app-button:hover {
+  background: var(--button-bg-hover);
+  box-shadow: var(--button-shadow-hover);
+}
+
+@media (max-width: 600px) {
+  .app-button--full {
+    width: 100%;
+  }
+}
