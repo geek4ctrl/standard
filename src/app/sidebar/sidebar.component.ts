@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SidebarItem } from './sidebar-item.model';
+import { SIDEBAR_ITEMS } from './sidebar-items.constants';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,22 +8,5 @@ import { SidebarItem } from './sidebar-item.model';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
-  readonly items: SidebarItem[] = [
-    {
-      id: 1,
-      label: 'Home',
-      icon: 'home',
-      isActive: true
-    },
-    {
-      id: 2,
-      label: 'Profiles',
-      icon: 'badge'
-    },
-    {
-      id: 3,
-      label: 'Third',
-      icon: 'description'
-    }
-  ];
+  readonly items: SidebarItem[] = SIDEBAR_ITEMS;
 }
