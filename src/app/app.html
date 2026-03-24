@@ -1,13 +1,14 @@
-<div>
-  <header class="top-nav">
-    <div class="nav-left">
-    </div>
-    <div class="nav-right">
-      <button class="action-button" type="button">SIGN OUT</button>
-    </div>
-  </header>
 
-  <main class="page-body">
-    <router-outlet />
-  </main>
+<div class="container">
+  <app-navigation-bar></app-navigation-bar>
+
+  <div class="layout-row">
+    <app-sidebar></app-sidebar>
+
+    <div class="content-area">
+      <main class="page-body">
+        <router-outlet />
+      </main>
+    </div>
+  </div>
 </div>
