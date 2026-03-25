@@ -59,7 +59,7 @@
           <span>No matching accounts</span>
         </div>
       } @else {
-        @for (account of filteredRows(); track account.Id) {
+        @for (account of pagedRows(); track account.Id) {
           <div class="table-row">
             <span>{{ account.Name }}</span>
             <span>{{ account.PhoneNumberId }}</span>
@@ -83,19 +83,24 @@
     </div>
 
     <div class="table-footer">
-      <span>Rows per page 15</span>
+      <span>Rows per page {{ pageSize() }}</span>
       <div class="pager">
-        <button class="icon-button" type="button" aria-label="Previous page">
+        <button
+          class="icon-button"
+          type="button"
+          (click)="previousPage()"
+        >
           <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
         </button>
-        <button class="icon-button" type="button" aria-label="Next page">
+        <button
+          class="icon-button"
+          type="button"
+          (click)="nextPage()"
+        >
           <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
         </button>
       </div>
-      <span>
-        {{ filteredRows().length ? '1-' + filteredRows().length : '0' }} of
-        {{ rows().length }}
-      </span>
+      <span>{{ range() }} of {{ rows().length }}</span>
     </div>
   </div>
 </section>
