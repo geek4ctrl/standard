@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
   errorMessage = signal<string | null>(null);
   pageSize = signal(10);
   pageIndex = signal(0);
+  totalCount = computed(() => this.rows().length);
+  visibleCount = computed(() => this.filteredRows().length);
   filteredRows = computed(() => {
     const query = this.search().trim().toLowerCase();
 
@@ -54,7 +56,7 @@ export class HomeComponent implements OnInit {
   });
 
   range = computed(() => {
-    const visible = this.filteredRows().length;
+    const visible = this.visibleCount();
 
     if (!visible) {
       return '0';
