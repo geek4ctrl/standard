@@ -12,7 +12,13 @@
     <div class="home-search">
       <label class="search-input">
         <span class="material-symbols-outlined" aria-hidden="true">search</span>
-        <input type="search" placeholder="Search" />
+        <input
+          #searchInput
+          type="search"
+          placeholder="Search"
+          [value]="search()"
+          (input)="updateSearch(searchInput.value)"
+        />
       </label>
 
       <button class="filter-button" type="button">
@@ -48,14 +54,26 @@
         <div class="table-row is-empty">
           <span>No accounts available</span>
         </div>
+      } @else if (filteredRows().length === 0) {
+        <div class="table-row is-empty">
+          <span>No matching accounts</span>
+        </div>
       } @else {
-        @for (account of rows(); track account.Id) {
+        @for (account of filteredRows(); track account.Id) {
           <div class="table-row">
             <span>{{ account.Name }}</span>
             <span>{{ account.PhoneNumberId }}</span>
             <span>{{ account.WhatsAppNumber }}</span>
-            <span>{{ account.MaintenanceMessageEnabled ? 'Enabled' : 'Disabled' }}</span>
-            <span class="status-pill">{{ account.isActive ? 'Active' : 'Inactive' }}</span>
+            <span>
+              {{
+                account.MaintenanceMessageEnabled
+                  ? maintenanceLabels.enabled
+                  : maintenanceLabels.disabled
+              }}
+            </span>
+            <span class="status-pill">
+              {{ account.isActive ? statusLabels.active : statusLabels.inactive }}
+            </span>
             <button class="icon-button" type="button" aria-label="Open row">
               <span class="material-symbols-outlined" aria-hidden="true">more_vert</span>
             </button>
@@ -74,7 +92,10 @@
           <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
         </button>
       </div>
-      <span>1-{{ rows().length }} of {{ rows().length }}</span>
+      <span>
+        {{ filteredRows().length ? '1-' + filteredRows().length : '0' }} of
+        {{ rows().length }}
+      </span>
     </div>
   </div>
 </section>
