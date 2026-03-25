@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
   search = signal('');
   isLoading = signal(true);
   errorMessage = signal<string | null>(null);
+  pageSize = signal(10);
+  pageIndex = signal(0);
   filteredRows = computed(() => {
     const query = this.search().trim().toLowerCase();
 
@@ -45,6 +47,25 @@ export class HomeComponent implements OnInit {
     });
   });
 
+  pagedRows = computed(() => {
+    const size = this.pageSize();
+    const start = this.pageIndex() * size;
+    return this.filteredRows().slice(start, start + size);
+  });
+
+  range = computed(() => {
+    const visible = this.filteredRows().length;
+
+    if (!visible) {
+      return '0';
+    }
+
+    const size = this.pageSize();
+    const start = this.pageIndex() * size + 1;
+    const end = Math.min(start + size - 1, visible);
+    return `${start}-${end}`;
+  });
+
   ngOnInit(): void {
     this.loadBusinessAccounts();
   }
@@ -57,6 +78,7 @@ export class HomeComponent implements OnInit {
       next: (data: BusinessAccount[]) => {
         this.rows.set(data ?? []);
         this.isLoading.set(false);
+        this.pageIndex.set(0);
       },
       error: () => {
         this.errorMessage.set('Unable to load business accounts.');
@@ -67,5 +89,17 @@ export class HomeComponent implements OnInit {
 
   updateSearch(value: string): void {
     this.search.set(value);
+    this.pageIndex.set(0);
+  }
+
+  previousPage(): void {
+    this.pageIndex.update((index) => Math.max(0, index - 1));
+  }
+
+  nextPage(): void {
+    const size = this.pageSize();
+    const total = this.filteredRows().length;
+    const maxIndex = Math.max(0, Math.ceil(total / size) - 1);
+    this.pageIndex.update((index) => Math.min(maxIndex, index + 1));
   }
 }
